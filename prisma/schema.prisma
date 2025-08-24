@@ -1,0 +1,59 @@
+generator client {
+provider = "prisma-client-js"
+}
+
+datasource db {
+provider = "sqlite"
+url = env("DATABASE_URL")
+}
+
+model Note {
+id String @id @default(cuid())
+content String
+tagsJson String @default("[]")
+pinned Boolean @default(false)
+archived Boolean @default(false)
+createdAt DateTime @default(now())
+updatedAt DateTime @updatedAt
+}
+
+model Debt {
+id String @id @default(cuid())
+person String
+amountCents Int
+direction String // OWE_ME | I_OWE
+description String?
+status String @default("OPEN")
+date DateTime @default(now())
+}
+
+model Transaction {
+id String @id @default(cuid())
+date DateTime
+category String
+description String?
+amountCents Int
+account String @default("cash")
+month String
+tagsJson String @default("[]")
+}
+
+model GasEntry {
+id String @id @default(cuid())
+date DateTime
+costCents Int
+liters Float?
+pricePerLiter Float?
+odometerKm Int?
+segmentKm Int?
+notes String?
+}
+
+model QuickLink {
+id String @id @default(cuid())
+label String
+url String
+icon String?
+hotkey String?
+openInNew Boolean @default(true)
+}
