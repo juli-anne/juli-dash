@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
-."$(dirname -- "$0")/_/husky.sh"
+. "$(dirname -- "$0")/_/husky.sh"
 
-# npm run typecheck && npm run test:run
+# run heavier checks before pushing
+npm run typecheck
+
+# set this up
+# npm run test:run
